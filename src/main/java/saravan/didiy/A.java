@@ -8,6 +8,7 @@ import lombok.Data;
 
 public class A {
 
+/*
     private A() {}
 
     public static A instance;
@@ -18,6 +19,7 @@ public class A {
         }
         return instance;
     }
+*/
 
     String name;
 

@@ -18,6 +18,7 @@ public class Di {
 
     private static DIFactory dif = new DIFactory();
 
+    /*
     static {
         // Populate mapSingle during startup
         try {
@@ -35,10 +36,17 @@ public class Di {
 
     }
 
-
+*/
     // getBean for singleton
     public synchronized Object getBean(Class theInterface) {
-        return mapSingle.get(theInterface);
+//        return mapSingle.get(theInterface);
+        Object obj = mapSingle.get(theInterface);
+        if (obj == null) {
+            obj = dif.getBean(theInterface);
+            mapSingle.put(theInterface, obj);
+        }
+
+        return obj;
     }
 
     // getBean for prototype
@@ -118,8 +126,10 @@ class DIFactory {
 
             Class<?> clazz = Class.forName(theInterface.getName());
 
-            Method method = clazz.getMethod("getInstance");
-            Object another = method.invoke(null);
+//            Method method = clazz.getMethod("getInstance");
+//            Object another = method.invoke(null);
+            Constructor constructor = clazz.getConstructor();
+            Object another = constructor.newInstance();
             another.hashCode(); // throw npe
             attachAutowiredBeans(another);
 

@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 public class C {
 
+/*
     private C() {}
 
     public static C instance;
@@ -16,6 +17,7 @@ public class C {
         }
         return instance;
     }
+*/
 
     String name;
 
